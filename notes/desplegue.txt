@@ -1,0 +1,62 @@
+datos generales
+setting 
+    import os
+
+    SECRET_KEY = 
+
+    SECRET_KEY = os.environ.get('SECRET_KEY', default= 'your secret key')
+
+    DEBUG = 'RENDER' not in os.environ  /  or true 
+
+    
+    RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    
+
+
+    levantar postgres
+    instalar 
+    pip install dj-database-url
+
+    import dj_database_url copiamos en setting
+
+    pip install psycopg2-binary 
+
+    editamos database de settings
+
+
+    pip install whitenoise[brotli]
+
+    luego añadir en el middleware
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    pegamamos lo siguiente debajo de static utl 
+    if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+------------------------------------------------------------------
+    craemos documento build.sh
+
+    set -o erreixt
+
+    # poetry install
+
+    python manage.py collectstatic --noinput
+    python manage.py migrate
+
+    abrimes la terminal de git bash desde vscode
+    chmod a+x build.sh
+    pip install gunicorn 
+    ---------------------------------------------------------------
+
+    termnal normal 
+
+    pip freeze > requirements.txt  (todo los mudulo que necestia mi proyecto apra funcionar )
+
+    luego modificamos el build y añadimos pip install -r requirements.txt 
+    ----------------------------------------------------------------------
+    ignoramos archivos para subir 
+    
